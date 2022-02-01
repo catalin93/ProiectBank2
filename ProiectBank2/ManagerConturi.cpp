@@ -39,6 +39,7 @@ void ManagerConturi::adaugareCont()
 	ContBancar* cont = new ContBancar(nume, prenume, iban);
 
 	m_listaConturi.push_back(cont);
+	m_fileManager->WriteToCSV(nume, prenume, iban);
 	system("cls");
 }
 
@@ -98,5 +99,15 @@ void ManagerConturi::Eliberare_Depunere()
 	{
 		cont->retragere(valoare);
 	}
+}
+
+ManagerConturi::ManagerConturi()
+{
+	m_fileManager = new FileManager();
+}
+
+ManagerConturi::~ManagerConturi()
+{
+	delete m_fileManager;
 }
 
