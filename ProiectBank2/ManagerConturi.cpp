@@ -118,13 +118,7 @@ void ManagerConturi::Eliberare_Depunere()
 ManagerConturi::ManagerConturi()
 {
 	m_fileManager = new FileManager();
-	//ContBancar* ptr = m_fileManager->ReadContBancarFromCSV();
-	//while (ptr != nullptr)
-	//{
-	//	//populam lista conturi cu ce se afla in .csv
-	//	m_listaConturi.push_back(ptr);
-	//	ptr = m_fileManager->ReadContBancarFromCSV();
-	//}
+	m_listaConturi = m_fileManager->ReadContBancarFromCSV();
 }
 
 ManagerConturi::~ManagerConturi()
