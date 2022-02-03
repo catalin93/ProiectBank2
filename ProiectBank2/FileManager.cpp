@@ -12,4 +12,5 @@ void FileManager::WriteToCSV(std::string nume, std::string prenume, std::string 
 	{
 		std::cout << "Eroare, fille is not open!!!\n";
 	}
+	csv_file.close();
 }

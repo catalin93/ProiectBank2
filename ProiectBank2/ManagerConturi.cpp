@@ -1,15 +1,28 @@
 #include "ManagerConturi.h"
 
 
-std::string CreareIBAN()
+
+
+std::string ManagerConturi::CreareIBAN()
 {
 	std::string base = "RO44ItSchool";
-	std::string tail;
-	srand(time(0));
-	tail = 00000 + (rand() % 99999);
+	int tail;
+	std::srand(time(0));
+	tail = 10000 + (std::rand() % 99999);
+	std::string tailString;
+	tailString = std::to_string(tail);
 	std::string body;
-	body = base + tail;
+	body = base + tailString;
+
+	for (auto& cont : m_listaConturi)
+	{
+		if (cont->getIban() == body)
+		{
+			return CreareIBAN();
+		}
+	}
 	return body;
+	
 }
 
 ContBancar* ManagerConturi::FindAcount()
@@ -35,12 +48,13 @@ void ManagerConturi::adaugareCont()
 	std::cout << "Introduceti prenumele dumneavoastra \n";
 	std::cin >> prenume;
 	//TODO: replace with create iban
-	iban = "test iban";
+	iban = CreareIBAN();
 	ContBancar* cont = new ContBancar(nume, prenume, iban);
 
 	m_listaConturi.push_back(cont);
 	m_fileManager->WriteToCSV(nume, prenume, iban, cont->getSold());
 	system("cls");
+	
 }
 
 int ManagerConturi::GetNumarConturi()
@@ -104,10 +118,18 @@ void ManagerConturi::Eliberare_Depunere()
 ManagerConturi::ManagerConturi()
 {
 	m_fileManager = new FileManager();
+	//ContBancar* ptr = m_fileManager->ReadContBancarFromCSV();
+	//while (ptr != nullptr)
+	//{
+	//	//populam lista conturi cu ce se afla in .csv
+	//	m_listaConturi.push_back(ptr);
+	//	ptr = m_fileManager->ReadContBancarFromCSV();
+	//}
 }
 
 ManagerConturi::~ManagerConturi()
 {
 	delete m_fileManager;
 }
+
 

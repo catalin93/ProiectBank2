@@ -13,7 +13,7 @@ class ManagerConturi
 {
 private:
 	std::vector<ContBancar*> m_listaConturi;
-	std::string CreareIBAN;
+	std::string CreareIBAN();
 	//TODO: Metoda trebuie sa creeze un iban unic care trebuie folosit pentru a crea conturi
 	ContBancar* FindAcount();
 	FileManager* m_fileManager;
@@ -26,3 +26,5 @@ public:
 	ManagerConturi();
 	~ManagerConturi();
 };
+
+std::string CreareIBAN();
